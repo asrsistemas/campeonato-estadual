@@ -48,8 +48,8 @@
       .col-12{grid-column:span 12}
     }
 
-    table{width:100%;border-collapse:collapse}
-    th,td{border-bottom:1px solid var(--border);padding:10px;text-align:center;font-size:14px}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{border-bottom:1px solid var(--border);padding:10px;text-align:center}
     th{color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
     tr:hover td{background:rgba(255,255,255,.03)}
 
@@ -107,7 +107,7 @@
 
   <script>
     const partidas = [
-      // resultados já informados
+      // Resultados já realizados
       { data:'2025-08-23', hora:'09:00', cat:'SUB11', a:'CME Santa Mercedes', b:'CME Paulicéia', grupo:'B', golsA:3, golsB:0 },
       { data:'2025-08-23', hora:'10:00', cat:'SUB11', a:'CME de Monte Castelo', b:'CME de Tupi Paulista', grupo:'C', golsA:0, golsB:1 },
       { data:'2025-08-23', hora:'11:00', cat:'SUB13', a:'CME de Tupi Paulista', b:'CME Paulicéia', grupo:'B', golsA:1, golsB:0 },
@@ -116,45 +116,38 @@
       { data:'2025-08-24', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME de Panorama', grupo:'B', golsA:0, golsB:0 },
       { data:'2025-08-24', hora:'11:00', cat:'SUB15', a:'CME de Monte Castelo', b:'CME Paulicéia', grupo:'B', golsA:2, golsB:0 },
 
-      // próximos jogos
-	  { data:'2025-08-30', hora:'08:00', cat:'SUB11', a:'CME de Panorama', b:'CME Paulicéia', grupo:'B' },
-      { data:'2025-08-30', hora:'9:00', cat:'SUB11', a:'CME Ouro Verde', b:'CME de Tupi Paulista', grupo:'C' },
+      // Próximos jogos
+      { data:'2025-08-30', hora:'08:00', cat:'SUB11', a:'CME de Panorama', b:'CME Paulicéia', grupo:'B' },
+      { data:'2025-08-30', hora:'09:00', cat:'SUB11', a:'CME Ouro Verde', b:'CME de Tupi Paulista', grupo:'C' },
       { data:'2025-08-30', hora:'10:00', cat:'SUB13', a:'CME Santa Mercedes', b:'CME de Monte Castelo', grupo:'A' },
-
       { data:'2025-08-31', hora:'08:00', cat:'SUB11', a:'CME de Panorama', b:'CME Santa Mercedes', grupo:'B' },
       { data:'2025-08-31', hora:'09:00', cat:'SUB13', a:'SEME de Dracena', b:'CME Paulicéia', grupo:'B' },
       { data:'2025-08-31', hora:'10:00', cat:'SUB13', a:'CME Nova Guataporanga', b:'CME Ouro Verde', grupo:'C' },
       { data:'2025-08-31', hora:'11:00', cat:'SUB15', a:'CME de Tupi Paulista', b:'SEME de Dracena', grupo:'A' },
-
       { data:'2025-09-06', hora:'08:00', cat:'SUB11', a:'CME de Junqueirópolis', b:'SEME de Dracena', grupo:'A' },
       { data:'2025-09-06', hora:'09:00', cat:'SUB11', a:'CME de Monte Castelo', b:'CME Ouro Verde', grupo:'C' },
       { data:'2025-09-06', hora:'10:00', cat:'SUB13', a:'CME de Junqueirópolis', b:'CME de Monte Castelo', grupo:'A' },
       { data:'2025-09-06', hora:'11:00', cat:'SUB13', a:'CME Nova Guataporanga', b:'CME de Panorama', grupo:'C' },
-
       { data:'2025-09-07', hora:'08:00', cat:'SUB13', a:'SEME de Dracena', b:'CME de Tupi Paulista', grupo:'B' },
       { data:'2025-09-07', hora:'09:00', cat:'SUB15', a:'CME Santa Mercedes', b:'CME de Tupi Paulista', grupo:'A' },
       { data:'2025-09-07', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME de Monte Castelo', grupo:'B' },
 
+      // Sem resultado ainda (playoffs)
       { data:'2025-09-13', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J1' },
       { data:'2025-09-13', hora:'09:00', cat:'SUB15', a:'CME Santa Mercedes', b:'SEME de Dracena', grupo:'A' },
       { data:'2025-09-13', hora:'10:00', cat:'SUB15', a:'CME Paulicéia', b:'CME de Panorama', grupo:'B' },
-
       { data:'2025-09-14', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J2' },
       { data:'2025-09-14', hora:'09:00', cat:'SUB15', a:'CME de Monte Castelo', b:'CME de Panorama', grupo:'B' },
       { data:'2025-09-14', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME Paulicéia', grupo:'B' },
-
       { data:'2025-09-20', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J3' },
       { data:'2025-09-20', hora:'09:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J4' },
       { data:'2025-09-20', hora:'10:00', cat:'SUB15', a:'1º GRUPO A', b:'2º GRUPO B', grupo:'S/F' },
       { data:'2025-09-20', hora:'11:00', cat:'SUB15', a:'2º GRUPO A', b:'1º GRUPO B', grupo:'S/F' },
-
       { data:'2025-09-21', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J5' },
       { data:'2025-09-21', hora:'09:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J1' },
       { data:'2025-09-21', hora:'10:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J2' },
-
       { data:'2025-09-27', hora:'08:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J3' },
       { data:'2025-09-27', hora:'09:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J4' },
-
       { data:'2025-09-28', hora:'08:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J5' },
       { data:'2025-09-28', hora:'09:00', cat:'SUB15', a:'VENCEDOR', b:'VENCEDOR', grupo:'F' },
     ];
@@ -179,25 +172,6 @@
       })
     });
 
-    function renderTabela(cat){
-      const dados = [...tabelas[cat]];
-      dados.sort((a,b)=> b.pts-a.pts || b.sg-a.sg || b.gp-a.gp || a.equipe.localeCompare(b.equipe));
-      const rows = dados.map(t=>`<tr>
-          <td>${t.equipe}</td><td>${t.pts}</td><td>${t.j}</td><td>${t.v}</td>
-          <td>${t.e}</td><td>${t.d}</td><td>${t.gp}</td><td>${t.gc}</td><td>${t.sg}</td><td>${t.apr}</td>
-        </tr>`).join('');
-      document.getElementById('tabela-wrap').innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Equipe</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th>
-              <th>GP</th><th>GC</th><th>SG</th><th>Aprov.</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>`;
-    }
-
     document.querySelectorAll('.subtab').forEach(btn=>{
       btn.addEventListener('click',()=>{
         document.querySelectorAll('.subtab').forEach(b=>b.classList.remove('active'));
@@ -205,28 +179,6 @@
         renderTabela(btn.dataset.subtab);
       })
     });
-
-    function renderListaPartidas(){
-      const host = document.getElementById('lista-partidas');
-      const porData = partidas.reduce((acc,p)=>{(acc[p.data]=acc[p.data]||[]).push(p);return acc;},{});      
-      const blocos = Object.keys(porData).sort().map(d=>{
-        const dataFmt = new Date(d+'T00:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
-        const linhas = porData[d].map(p=>{
-          const placar = (p.golsA!=null) ? `${p.golsA} x ${p.golsB}` : 'x';
-          return `<tr><td>${p.hora}</td><td>${p.cat}</td><td>${p.a}</td><td>${placar}</td><td>${p.b}</td><td>${p.grupo}</td></tr>`;
-        }).join('');
-        return `<div class="card" style="margin-bottom:12px">
-          <h3>${dataFmt}</h3>
-          <div class="content">
-            <table>
-              <thead><tr><th>Hora</th><th>Categoria</th><th>Equipe A</th><th>Placar</th><th>Equipe B</th><th>Grupo</th></tr></thead>
-              <tbody>${linhas}</tbody>
-            </table>
-          </div>
-        </div>`;
-      }).join('');
-      host.innerHTML = blocos || '<div class="hint">Nenhuma partida cadastrada.</div>';
-    }
 
     function registrarResultado(cat, equipeA, equipeB, golsA, golsB){
       const tabela = tabelas[cat];
@@ -251,6 +203,47 @@
     partidas.forEach(p=>{
       if(p.golsA!=null) registrarResultado(p.cat, p.a, p.b, p.golsA, p.golsB);
     });
+
+    function renderTabela(cat){
+      const dados = [...tabelas[cat]];
+      dados.sort((a,b)=> b.pts-a.pts || b.sg-a.sg || b.gp-a.gp || a.equipe.localeCompare(b.equipe));
+      const rows = dados.map(t=>`<tr>
+          <td>${t.equipe}</td><td>${t.pts}</td><td>${t.j}</td><td>${t.v}</td>
+          <td>${t.e}</td><td>${t.d}</td><td>${t.gp}</td><td>${t.gc}</td><td>${t.sg}</td><td>${t.apr}</td>
+        </tr>`).join('');
+      document.getElementById('tabela-wrap').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Equipe</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th>
+              <th>GP</th><th>GC</th><th>SG</th><th>Aprov.</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    function renderListaPartidas(){
+      const host = document.getElementById('lista-partidas');
+      const porData = partidas.reduce((acc,p)=>(acc[p.data]=acc[p.data]||[]).push(p)&&acc,{});
+      const blocos = Object.keys(porData).sort().map(d=>{
+        const dataFmt = new Date(d+'T00:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+        const linhas = porData[d].map(p=>{
+          const placar = (p.golsA!=null) ? `${p.golsA} x ${p.golsB}` : 'x';
+          return `<tr><td>${p.hora}</td><td>${p.cat}</td><td>${p.a}</td><td>${placar}</td><td>${p.b}</td><td>${p.grupo}</td></tr>`;
+        }).join('');
+        return `<div class="card" style="margin-bottom:12px">
+          <h3>${dataFmt}</h3>
+          <div class="content">
+            <table>
+              <thead><tr><th>Hora</th><th>Categoria</th><th>Equipe A</th><th>Placar</th><th>Equipe B</th><th>Grupo</th></tr></thead>
+              <tbody>${linhas}</tbody>
+            </table>
+          </div>
+        </div>`;
+      }).join('');
+      host.innerHTML = blocos || '<div class="hint">Nenhuma partida cadastrada.</div>';
+    }
 
     renderListaPartidas();
     renderTabela('SUB11');
