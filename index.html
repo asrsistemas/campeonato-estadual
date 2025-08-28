@@ -1,252 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CAMPEONATO ESTADUAL DE FUTEBOL</title>
-  <style>
-    :root{
-      --bg:#0f172a;
-      --bg-elev:#111827;
-      --card:#0b1220;
-      --text:#e5e7eb;
-      --muted:#94a3b8;
-      --pri:#3b82f6;
-      --pri-2:#60a5fa;
-      --ok:#10b981;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --border:#1f2937;
-      --radius:16px;
-      --shadow:0 8px 24px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-    a{color:inherit}
-
-    .hero{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0b1020,rgba(11,16,32,.85));border-bottom:1px solid var(--border);backdrop-filter:blur(6px)}
-    .hero-inner{max-width:1100px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;gap:16px}
-    .badge{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--pri-2);font-weight:600;font-size:12px;letter-spacing:.3px}
-    .title{font-size:20px;font-weight:700}
-    .sub{font-size:12px;color:var(--muted)}
-
-    .tabs{max-width:1100px;margin:0 auto;padding:0 16px}
-    .tabbar{display:flex;gap:10px;overflow:auto;padding:10px 0 16px}
-    .tab{border:1px solid var(--border);background:var(--bg-elev);padding:10px 14px;border-radius:999px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
-    .tab.active{background:var(--pri);color:#fff;border-color:transparent}
-
-    .section{max-width:1100px;margin:0 auto;padding:12px 16px 32px}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card h3{margin:0;padding:14px 16px;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted)}
-    .card .content{padding:16px}
-
-    @media(min-width:900px){
-      .col-4{grid-column:span 4}
-      .col-6{grid-column:span 6}
-      .col-8{grid-column:span 8}
-      .col-12{grid-column:span 12}
-    }
-
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    th,td{border-bottom:1px solid var(--border);padding:10px;text-align:center}
-    th{color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-    tr:hover td{background:rgba(255,255,255,.03)}
-
-    .fixture{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:10px;background:linear-gradient(180deg,#0b1220,#0a1324)}
-    .fixture .lhs{display:flex;align-items:center;gap:10px}
-    .pill{font-size:11px;color:#fff;background:var(--pri);padding:4px 8px;border-radius:999px}
-    .time{font-weight:700}
-    .cat{color:var(--muted);font-size:12px}
-
-    .subtabs{display:flex;gap:8px;margin:8px 16px 0}
-    .subtab{border:1px solid var(--border);background:transparent;padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
-    .subtab.active{background:var(--pri);color:#fff;border-color:transparent}
-
-    .hint{color:var(--muted);font-size:12px;margin-top:6px}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CAMPEONATO ESTADUAL DE FUTEBOL</title>
+<style>
+  :root{
+    --bg:#0f172a; --card:#111827; --text:#e5e7eb;
+    --muted:#94a3b8; --pri:#3b82f6; --border:#1f2937;
+    --radius:12px; --shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);padding-bottom:30px}
+  .header{position:sticky;top:0;background:var(--card);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;z-index:50;border-bottom:1px solid var(--border)}
+  .header .title{font-weight:700;font-size:18px}
+  .tabs{display:flex;gap:8px;overflow-x:auto;margin-top:8px}
+  .tab{padding:8px 12px;border-radius:999px;border:1px solid var(--border);cursor:pointer;white-space:nowrap;color:var(--muted)}
+  .tab.active{background:var(--pri);color:#fff;border-color:transparent}
+  .section{padding:12px 16px}
+  .card{background:var(--card);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+  .fixture{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+  .fixture .lhs{display:flex;gap:8px;align-items:center}
+  .pill{background:var(--pri);color:#fff;padding:2px 6px;border-radius:999px;font-size:11px}
+  .time{font-weight:700;font-size:14px}
+  .cat{color:var(--muted);font-size:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{padding:6px;text-align:center;border-bottom:1px solid var(--border)}
+  th{color:var(--muted);font-weight:600;font-size:12px}
+  tr:hover td{background:rgba(255,255,255,.03)}
+  .subtabs{display:flex;gap:8px;margin:8px 0;overflow-x:auto}
+  .subtab{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .subtab.active{background:var(--pri);color:#fff;border-color:transparent}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px}
+</style>
 </head>
 <body>
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="badge">2025</div>
-      <div>
-        <div class="title">CAMPEONATO ESTADUAL DE FUTEBOL</div>
-        <div class="sub">Partidas • Classificação</div>
-      </div>
-    </div>
-    <div class="tabs">
-      <div class="tabbar">
-        <button class="tab active" data-tab="matches">Partidas</button>
-        <button class="tab" data-tab="standings">Classificação</button>
-      </div>
-    </div>
+<div class="header">
+  <div class="title">CAMPEONATO ESTADUAL 2025</div>
+</div>
+<div class="tabs">
+  <div class="tab active" data-tab="matches">Partidas</div>
+  <div class="tab" data-tab="standings">Classificação</div>
+</div>
+
+<section class="section" id="matches" role="region">
+  <div id="lista-partidas"></div>
+</section>
+
+<section class="section" id="standings" style="display:none" role="region">
+  <div class="subtabs">
+    <div class="subtab active" data-subtab="SUB11">SUB11</div>
+    <div class="subtab" data-subtab="SUB13">SUB13</div>
+    <div class="subtab" data-subtab="SUB15">SUB15</div>
   </div>
+  <div id="tabela-wrap"></div>
+  <div class="hint">Critérios: 3 pts vitória · 1 pt empate · Saldo = GP - GC.</div>
+</section>
 
-  <section class="section" id="matches" role="region">
-    <div class="card col-12">
-      <h3>Programação completa</h3>
-      <div class="content" id="lista-partidas"></div>
-    </div>
-  </section>
+<script>
+const partidas = [
+  { data:'2025-08-23', hora:'09:00', cat:'SUB11', a:'CME Santa Mercedes', b:'CME Paulicéia', grupo:'B', golsA:3, golsB:0 },
+  { data:'2025-08-23', hora:'10:00', cat:'SUB11', a:'CME de Monte Castelo', b:'CME de Tupi Paulista', grupo:'C', golsA:0, golsB:1 },
+  { data:'2025-08-23', hora:'11:00', cat:'SUB13', a:'CME de Tupi Paulista', b:'CME Paulicéia', grupo:'B', golsA:1, golsB:0 },
+  { data:'2025-08-24', hora:'08:00', cat:'SUB13', a:'CME de Junqueirópolis', b:'CME Santa Mercedes', grupo:'A', golsA:0, golsB:5 },
+  { data:'2025-08-24', hora:'09:00', cat:'SUB13', a:'CME Ouro Verde', b:'CME de Panorama', grupo:'C', golsA:2, golsB:2 },
+  { data:'2025-08-24', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME de Panorama', grupo:'B', golsA:0, golsB:0 },
+  { data:'2025-08-24', hora:'11:00', cat:'SUB15', a:'CME de Monte Castelo', b:'CME Paulicéia', grupo:'B', golsA:2, golsB:0 },
+  { data:'2025-08-30', hora:'09:00', cat:'SUB11', a:'CME de Panorama', b:'CME Paulicéia', grupo:'B' },
+  { data:'2025-08-30', hora:'10:00', cat:'SUB11', a:'CME Ouro Verde', b:'CME de Tupi Paulista', grupo:'C' },
+  { data:'2025-08-30', hora:'11:00', cat:'SUB13', a:'CME Santa Mercedes', b:'CME de Monte Castelo', grupo:'A' },
+];
 
-  <section class="section" id="standings" style="display:none" role="region">
-    <div class="card col-12">
-      <h3>Classificação</h3>
-      <div class="subtabs">
-        <button class="subtab active" data-subtab="SUB11">SUB11</button>
-        <button class="subtab" data-subtab="SUB13">SUB13</button>
-        <button class="subtab" data-subtab="SUB15">SUB15</button>
-      </div>
-      <div class="content">
-        <div id="tabela-wrap"></div>
-        <div class="hint">Critérios: 3 pts vitória · 1 pt empate · Saldo = GP - GC.</div>
-      </div>
-    </div>
-  </section>
+const equipes = [
+  'CME Nova Guataporanga','SEME de Dracena','CME Santa Mercedes','CME Paulicéia',
+  'CME de Monte Castelo','CME de Tupi Paulista','CME de Junqueirópolis',
+  'CME de Panorama','CME de Ouro Verde'
+];
 
-  <script>
-    const partidas = [
-      // Resultados já realizados
-      { data:'2025-08-23', hora:'09:00', cat:'SUB11', a:'CME Santa Mercedes', b:'CME Paulicéia', grupo:'B', golsA:3, golsB:0 },
-      { data:'2025-08-23', hora:'10:00', cat:'SUB11', a:'CME de Monte Castelo', b:'CME de Tupi Paulista', grupo:'C', golsA:0, golsB:1 },
-      { data:'2025-08-23', hora:'11:00', cat:'SUB13', a:'CME de Tupi Paulista', b:'CME Paulicéia', grupo:'B', golsA:1, golsB:0 },
-      { data:'2025-08-24', hora:'08:00', cat:'SUB13', a:'CME de Junqueirópolis', b:'CME Santa Mercedes', grupo:'A', golsA:0, golsB:5 },
-      { data:'2025-08-24', hora:'09:00', cat:'SUB13', a:'CME Ouro Verde', b:'CME de Panorama', grupo:'C', golsA:2, golsB:2 },
-      { data:'2025-08-24', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME de Panorama', grupo:'B', golsA:0, golsB:0 },
-      { data:'2025-08-24', hora:'11:00', cat:'SUB15', a:'CME de Monte Castelo', b:'CME Paulicéia', grupo:'B', golsA:2, golsB:0 },
+const baseTabela = ()=> equipes.map(n=>({equipe:n,pts:0,j:0,v:0,e:0,d:0,gp:0,gc:0,sg:0,apr:'0%'}));
+const tabelas = {SUB11:baseTabela(), SUB13:baseTabela(), SUB15:baseTabela()};
 
-      // Próximos jogos
-      { data:'2025-08-30', hora:'08:00', cat:'SUB11', a:'CME de Panorama', b:'CME Paulicéia', grupo:'B' },
-      { data:'2025-08-30', hora:'09:00', cat:'SUB11', a:'CME Ouro Verde', b:'CME de Tupi Paulista', grupo:'C' },
-      { data:'2025-08-30', hora:'10:00', cat:'SUB13', a:'CME Santa Mercedes', b:'CME de Monte Castelo', grupo:'A' },
-      { data:'2025-08-31', hora:'08:00', cat:'SUB11', a:'CME de Panorama', b:'CME Santa Mercedes', grupo:'B' },
-      { data:'2025-08-31', hora:'09:00', cat:'SUB13', a:'SEME de Dracena', b:'CME Paulicéia', grupo:'B' },
-      { data:'2025-08-31', hora:'10:00', cat:'SUB13', a:'CME Nova Guataporanga', b:'CME Ouro Verde', grupo:'C' },
-      { data:'2025-08-31', hora:'11:00', cat:'SUB15', a:'CME de Tupi Paulista', b:'SEME de Dracena', grupo:'A' },
-      { data:'2025-09-06', hora:'08:00', cat:'SUB11', a:'CME de Junqueirópolis', b:'SEME de Dracena', grupo:'A' },
-      { data:'2025-09-06', hora:'09:00', cat:'SUB11', a:'CME de Monte Castelo', b:'CME Ouro Verde', grupo:'C' },
-      { data:'2025-09-06', hora:'10:00', cat:'SUB13', a:'CME de Junqueirópolis', b:'CME de Monte Castelo', grupo:'A' },
-      { data:'2025-09-06', hora:'11:00', cat:'SUB13', a:'CME Nova Guataporanga', b:'CME de Panorama', grupo:'C' },
-      { data:'2025-09-07', hora:'08:00', cat:'SUB13', a:'SEME de Dracena', b:'CME de Tupi Paulista', grupo:'B' },
-      { data:'2025-09-07', hora:'09:00', cat:'SUB15', a:'CME Santa Mercedes', b:'CME de Tupi Paulista', grupo:'A' },
-      { data:'2025-09-07', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME de Monte Castelo', grupo:'B' },
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ['matches','standings'].forEach(id=>document.getElementById(id).style.display=id===btn.dataset.tab?'block':'none');
+  });
+});
 
-      // Sem resultado ainda (playoffs)
-      { data:'2025-09-13', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J1' },
-      { data:'2025-09-13', hora:'09:00', cat:'SUB15', a:'CME Santa Mercedes', b:'SEME de Dracena', grupo:'A' },
-      { data:'2025-09-13', hora:'10:00', cat:'SUB15', a:'CME Paulicéia', b:'CME de Panorama', grupo:'B' },
-      { data:'2025-09-14', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J2' },
-      { data:'2025-09-14', hora:'09:00', cat:'SUB15', a:'CME de Monte Castelo', b:'CME de Panorama', grupo:'B' },
-      { data:'2025-09-14', hora:'10:00', cat:'SUB15', a:'CME de Junqueirópolis', b:'CME Paulicéia', grupo:'B' },
-      { data:'2025-09-20', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J3' },
-      { data:'2025-09-20', hora:'09:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J4' },
-      { data:'2025-09-20', hora:'10:00', cat:'SUB15', a:'1º GRUPO A', b:'2º GRUPO B', grupo:'S/F' },
-      { data:'2025-09-20', hora:'11:00', cat:'SUB15', a:'2º GRUPO A', b:'1º GRUPO B', grupo:'S/F' },
-      { data:'2025-09-21', hora:'08:00', cat:'SUB11', a:'VENCEDOR', b:'VENCEDOR', grupo:'J5' },
-      { data:'2025-09-21', hora:'09:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J1' },
-      { data:'2025-09-21', hora:'10:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J2' },
-      { data:'2025-09-27', hora:'08:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J3' },
-      { data:'2025-09-27', hora:'09:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J4' },
-      { data:'2025-09-28', hora:'08:00', cat:'SUB13', a:'VENCEDOR', b:'VENCEDOR', grupo:'J5' },
-      { data:'2025-09-28', hora:'09:00', cat:'SUB15', a:'VENCEDOR', b:'VENCEDOR', grupo:'F' },
-    ];
+document.querySelectorAll('.subtab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.subtab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTabela(btn.dataset.subtab);
+  });
+});
 
-    const equipes = [
-      'CME Nova Guataporanga','SEME de Dracena','CME Santa Mercedes','CME Paulicéia',
-      'CME de Monte Castelo','CME de Tupi Paulista','CME de Junqueirópolis',
-      'CME de Panorama','CME de Ouro Verde'
-    ];
+function registrarResultado(cat,a,b,gA,gB){
+  const t = tabelas[cat], timeA=t.find(x=>x.equipe===a), timeB=t.find(x=>x.equipe===b);
+  if(!timeA||!timeB)return;
+  timeA.j++; timeB.j++;
+  timeA.gp+=gA; timeA.gc+=gB; timeB.gp+=gB; timeB.gc+=gA;
+  timeA.sg=timeA.gp-timeA.gc; timeB.sg=timeB.gp-timeB.gc;
+  if(gA>gB){timeA.v++;timeA.pts+=3;timeB.d++} 
+  else if(gB>gA){timeB.v++;timeB.pts+=3;timeA.d++} 
+  else{timeA.e++;timeB.e++;timeA.pts++;timeB.pts++}
+  timeA.apr=Math.round((timeA.pts/(timeA.j*3))*100)+'%';
+  timeB.apr=Math.round((timeB.pts/(timeB.j*3))*100)+'%';
+}
 
-    const baseTabela = () => equipes.map(n=>({ equipe:n, pts:0,j:0,v:0,e:0,d:0,gp:0,gc:0,sg:0,apr:'0%' }));
-    const tabelas = { SUB11: baseTabela(), SUB13: baseTabela(), SUB15: baseTabela() };
+partidas.forEach(p=>{if(p.golsA!=null)registrarResultado(p.cat,p.a,p.b,p.golsA,p.golsB)});
 
-    document.querySelectorAll('.tab').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = btn.dataset.tab;
-        ['matches','standings'].forEach(id=>{
-          document.getElementById(id).style.display = id===tab? 'block':'none';
-        });
-      })
-    });
+function renderListaPartidas(){
+  const host=document.getElementById('lista-partidas');
+  host.innerHTML=partidas.map(p=>{
+    const ds=new Date(p.data+'T'+p.hora+':00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'});
+    const placar=p.golsA!=null?`${p.golsA} x ${p.golsB}`:'x';
+    return `<div class="card fixture"><div class="lhs"><span class="pill">${ds}</span><div><div class="time">${p.hora}</div><div class="cat">${p.cat} • Grupo ${p.grupo}</div></div></div><div>${p.a} &nbsp;<strong>${placar}</strong>&nbsp; ${p.b}</div></div>`;
+  }).join('');
+}
 
-    document.querySelectorAll('.subtab').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        document.querySelectorAll('.subtab').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        renderTabela(btn.dataset.subtab);
-      })
-    });
+function renderTabela(cat){
+  const dados=[...tabelas[cat]];
+  dados.sort((a,b)=>b.pts-a.pts || b.sg-a.sg || b.gp-a.gp || a.equipe.localeCompare(b.equipe));
+  document.getElementById('tabela-wrap').innerHTML=`<table>
+    <thead><tr><th>Equipe</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>Aprov.</th></tr></thead>
+    <tbody>${dados.map(t=>`<tr><td>${t.equipe}</td><td>${t.pts}</td><td>${t.j}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td><td>${t.gp}</td><td>${t.gc}</td><td>${t.sg}</td><td>${t.apr}</td></tr>`).join('')}</tbody>
+  </table>`;
+}
 
-    function registrarResultado(cat, equipeA, equipeB, golsA, golsB){
-      const tabela = tabelas[cat];
-      const timeA = tabela.find(t=>t.equipe===equipeA);
-      const timeB = tabela.find(t=>t.equipe===equipeB);
-      if(!timeA || !timeB) return;
-
-      timeA.j++; timeB.j++;
-      timeA.gp += golsA; timeA.gc += golsB;
-      timeB.gp += golsB; timeB.gc += golsA;
-      timeA.sg = timeA.gp - timeA.gc;
-      timeB.sg = timeB.gp - timeB.gc;
-
-      if(golsA > golsB){ timeA.v++; timeA.pts+=3; timeB.d++; }
-      else if(golsB > golsA){ timeB.v++; timeB.pts+=3; timeA.d++; }
-      else { timeA.e++; timeB.e++; timeA.pts++; timeB.pts++; }
-
-      timeA.apr = Math.round((timeA.pts/(timeA.j*3))*100)+'%';
-      timeB.apr = Math.round((timeB.pts/(timeB.j*3))*100)+'%';
-    }
-
-    partidas.forEach(p=>{
-      if(p.golsA!=null) registrarResultado(p.cat, p.a, p.b, p.golsA, p.golsB);
-    });
-
-    function renderTabela(cat){
-      const dados = [...tabelas[cat]];
-      dados.sort((a,b)=> b.pts-a.pts || b.sg-a.sg || b.gp-a.gp || a.equipe.localeCompare(b.equipe));
-      const rows = dados.map(t=>`<tr>
-          <td>${t.equipe}</td><td>${t.pts}</td><td>${t.j}</td><td>${t.v}</td>
-          <td>${t.e}</td><td>${t.d}</td><td>${t.gp}</td><td>${t.gc}</td><td>${t.sg}</td><td>${t.apr}</td>
-        </tr>`).join('');
-      document.getElementById('tabela-wrap').innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Equipe</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th>
-              <th>GP</th><th>GC</th><th>SG</th><th>Aprov.</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>`;
-    }
-
-    function renderListaPartidas(){
-      const host = document.getElementById('lista-partidas');
-      const porData = partidas.reduce((acc,p)=>(acc[p.data]=acc[p.data]||[]).push(p)&&acc,{});
-      const blocos = Object.keys(porData).sort().map(d=>{
-        const dataFmt = new Date(d+'T00:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
-        const linhas = porData[d].map(p=>{
-          const placar = (p.golsA!=null) ? `${p.golsA} x ${p.golsB}` : 'x';
-          return `<tr><td>${p.hora}</td><td>${p.cat}</td><td>${p.a}</td><td>${placar}</td><td>${p.b}</td><td>${p.grupo}</td></tr>`;
-        }).join('');
-        return `<div class="card" style="margin-bottom:12px">
-          <h3>${dataFmt}</h3>
-          <div class="content">
-            <table>
-              <thead><tr><th>Hora</th><th>Categoria</th><th>Equipe A</th><th>Placar</th><th>Equipe B</th><th>Grupo</th></tr></thead>
-              <tbody>${linhas}</tbody>
-            </table>
-          </div>
-        </div>`;
-      }).join('');
-      host.innerHTML = blocos || '<div class="hint">Nenhuma partida cadastrada.</div>';
-    }
-
-    renderListaPartidas();
-    renderTabela('SUB11');
-  </script>
+renderListaPartidas();
+renderTabela('SUB11');
+</script>
 </body>
 </html>
